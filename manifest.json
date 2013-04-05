@@ -10,7 +10,6 @@
 		"history","tabs"
 	],
 	"browser_action":{
-		"default_popup"	: "reopenTabs.html",
 		"default_icon"	: "reopenTabs.png",
 		"default_title"	: "reopenTabs"
 	}
