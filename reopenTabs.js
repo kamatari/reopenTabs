@@ -11,6 +11,14 @@ chrome.tabs.onCreated.addListener(
 	}
 )
 
+chrome.tabs.onUpdated.addListener(
+	function(updateTabId, changeInfo) {
+		if(changeInfo.url != null) {
+			openedTabArray[updateTabId] = changeInfo.url;
+		}
+	}
+);
+
 chrome.tabs.onRemoved.addListener(
 	function(closedTabId) {
 		closedTabArray.push(openedTabArray[closedTabId]);
