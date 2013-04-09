@@ -1,7 +1,7 @@
 // reopenTabs.js
 // Created by kamatari
 
-var MaxTabArrayNum	= 100;
+var MaxTabArrayNum	= 1000;
 var stockTabsCount	= 0;
 var badgeColor		= new Array(116, 169, 214, 255);
 var openedTabArray	= new Array();
@@ -12,6 +12,7 @@ chrome.browserAction.setBadgeBackgroundColor({color : badgeColor})
 // extensionが有効になった時点で開いているtabの情報をstock
 if (openedTabArray.length == 0) {
 	chrome.windows.getAll({"populate" : true}, setAllTabInfo);
+	updateBadgeCount();
 }
 
 // 新しくtabを開いた時と更新された時のurlをstock
