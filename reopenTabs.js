@@ -1,7 +1,7 @@
 // reopenTabs.js
 // Created by kamatari
 
-var MaxTabArrayNum	= 1000;
+var MaxTabArrayNum	= 9999;
 var stockTabsCount	= 0;
 var badgeColor		= new Array(116, 169, 214, 255);
 var openedTabArray	= new Array();
@@ -73,6 +73,7 @@ function countLength(inputArray) {
 }
 
 function updateBadgeCount() {
-	stockTabsCount = closedTabArray.length;
+	var closedTabcount	= countLength(closedTabArray);
+	stockTabsCount		= closedTabcount;
 	chrome.browserAction.setBadgeText({text : String(stockTabsCount)});
 }
