@@ -2,20 +2,15 @@
 // Created by kamatari
 
 var MaxTabArrayNum	= 9999;
-var stockTabsCount	= 0;
-var badgeColor		= new Array(116, 169, 214, 255);
 var openedTabArray	= new Array();
 var closedTabArray	= new Array();
 
-chrome.browserAction.setBadgeBackgroundColor({color : badgeColor})
-
-// extensionが有効になった時点で開いているtabの情報をstock
+// extension???????????????tab????stock
 if (openedTabArray.length == 0) {
 	chrome.windows.getAll({"populate" : true}, setAllTabInfo);
-	updateBadgeCount();
 }
 
-// 新しくtabを開いた時と更新された時のurlをstock
+// ???tab?????????????url?stock
 chrome.tabs.onUpdated.addListener(
 	function(updateTabId, changeInfo) {
 		if (changeInfo.url != null) {
@@ -25,27 +20,24 @@ chrome.tabs.onUpdated.addListener(
 	}
 );
 
-// 閉じたtabのurlをstock
+// ???tab?url?stock
 chrome.tabs.onRemoved.addListener(
 	function(closedTabId) {
 		if (openedTabArray[closedTabId] != null) {
 			closedTabArray.push(openedTabArray[closedTabId]);
 			checkLengthAndArrayShift(closedTabArray);
-			updateBadgeCount();
 		}
 	}
 );
 
-// extensionのアイコンをclickで,stockしてあるurlで新規tabを作成
+// extension??????click?,stock????url???tab???
 chrome.browserAction.onClicked.addListener(
 	function() {
 		if (closedTabArray.length > 0) {
 			chrome.tabs.create({"url" : closedTabArray.pop(),"selected":false});
-			updateBadgeCount();
 		}
 	}
 );
-
 
 function setAllTabInfo(AllTabInfo) {
 	for (var i=0; i<AllTabInfo.length; i++) {
@@ -64,16 +56,4 @@ function checkLengthAndArrayShift(urlArray) {
 			if (arrayCount <= MaxTabArrayNum) {break;}
 		}
 	}
-}
-
-function countLength(inputArray) {
-	var count = 0;
-	for (var key in inputArray) { count++; }
-	return count;
-}
-
-function updateBadgeCount() {
-	var closedTabcount	= countLength(closedTabArray);
-	stockTabsCount		= closedTabcount;
-	chrome.browserAction.setBadgeText({text : String(stockTabsCount)});
 }
