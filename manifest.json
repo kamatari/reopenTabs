@@ -7,7 +7,7 @@
 		"scripts" :	["reopenTabs.js"]
 	},
 	"permissions":[
-		"history","tabs"
+		"tabs"
 	],
 	"icons": {
 		"16": "icon16.png",
