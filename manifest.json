@@ -2,7 +2,7 @@
 	"manifest_version":3,
 	"name":"Reopen Tabs",
 	"description":"reopen closed tabs",
-	"version":"2.0",
+	"version":"2.1",
 	"background": {
 		"service_worker" : ["reopenTabs.js"]
 	},
